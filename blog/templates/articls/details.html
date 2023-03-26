@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Article #{{ article.id }}: {{ article.title }}
+{% endblock %}
+
+{% block body %}
+
+<h1>{{ article.title }}</h1>
+
+<div class="row row-cols-1 g-4">
+
+  <div class="col">
+    <div class="card h-100">
+      <div class="card-body">
+<!--        <h5 class="card-title">{{ article.title }}</h5>-->
+        <p class="card-text">{{ article.body }}</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-muted"><p>Published: {{ moment(article.dt_created).format('LLLL') }}</p>
+        <p>by: {{ article.author.user.username }}</p></small>
+      </div>
+    </div>
+  </div>
+    {% if article.tags %}
+<ul>
+    {% for tag in article.tags %}
+    <a class="btn btn-primary" href="#" role="button">{{ tag.name }}</a>
+    {% endfor %}
+</ul>
+{% endif %}
+
+</div>
+
+<!--<h1>{{ article.title }}</h1>-->
+<!--<div>-->
+<!--    <p>{{ article.body }}</p>-->
+<!--    <div>Published {{ moment(article.dt_created).format('LLLL') }}</div>-->
+<!--    <div>by {{ article.author.user.username }}</div>-->
+<!--</div>-->
+<!--{% if article.tags %}-->
+<!--<div>Tags:</div>-->
+<!--<ul>-->
+<!--    {% for tag in article.tags %}-->
+<!--    <a class="btn btn-primary" href="#" role="button">{{ tag.name }}</a>-->
+<!--    {% endfor %}-->
+<!--</ul>-->
+<!--{% endif %}-->
+<hr>
+<div>
+    <a href="{{  url_for('articles.list') }}">Back to users list</a>
+</div>
+{% endblock %}

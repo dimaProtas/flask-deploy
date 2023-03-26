@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+User: {{user.id}}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ user.username}}</h1>
+    <body>
+    {% if user.first_name %}
+        <p>Name: <b>{{ user.first_name }}</b></p>
+        <p>Las name: <b>{{ user.last_name }}</b></p>
+    {% endif %}
+        <p>email: <b>{{ user.email }}</b></p>
+    </body>
+    {% if user.is_staff %}
+        <span class="badge bg-secondary">staff</span>
+    {% endif %}
+<hr>
+Articles: (count: {{ count_articles_det }}):
+<ul>
+    {% for article in user.author.articles %}
+    <li>{{article.id}} - {{ article.title }}</li>
+    {% endfor %}
+</ul>
+<hr>
+    <div>
+        <a href="{{  url_for('user_app.list') }}">Back to users list</a>
+    </div>
+{% endblock %}
